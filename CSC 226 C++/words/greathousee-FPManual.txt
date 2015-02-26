@@ -1,0 +1,18 @@
+"Words" Game Manual
+
+Objective: Use the letters given to create as many words from the english
+		language as possible.
+
+Gameplay: The very moment the program is opened, a timer begins to count down.
+		While the timer counts down from 30 seconds. The user types a word,
+		then presses enter. If the word is present on the screen, and
+		it is confirmed in the dictionary, the score is raied by one point.
+		If the word entered is not valid, nothing happens and the timer 
+		continues to count down.
+
+Players: Currently, the game is designed for a single player. However, a couple
+		can take turns and compete for the best score.
+
+Notes: When the timer reaches zero, the program displays the final score
+		and gives the user a chance to play again.
+

@@ -1,0 +1,3 @@
+The Maxum of the numbers is+16.00000
+The Minimum of the numbers is+8.00000
+The average of the numbers is+11.50000

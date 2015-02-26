@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1360591720 source:c:\users\greathousee\documents\c++\penis\main.cpp
+	<cstdlib>
+	<ctime>
+	<iostream>
+

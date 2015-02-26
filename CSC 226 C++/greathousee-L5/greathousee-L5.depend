@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1366209157 source:c:\users\greathousee\documents\c++\greathousee-l5\main.cpp
+	<iostream>
+	<ctime>
+	<cmath>
+	<cstdlib>
+

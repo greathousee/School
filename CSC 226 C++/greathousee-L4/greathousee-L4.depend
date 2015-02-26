@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1353754660 source:c:\users\greathousee\documents\c++\greathousee-l4\main.cpp
+	<iostream>
+
+1365038198 source:c:\users\greathousee\documents\c++\greathousee-l4\greathousee-a4_1_ (1).cpp
+	<iostream>
+	<cstdlib>
+	<fstream>
+

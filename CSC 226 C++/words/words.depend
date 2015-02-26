@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1386725652 source:c:\users\greathousee\dropbox\words\features.cpp
+	"features.h"
+	<iostream>
+	<fstream>
+	<vector>
+	"dictionary.h"
+	<cstdlib>
+	<ctime>
+
+1386735537 c:\users\greathousee\dropbox\words\features.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<math.h>
+	"dictionary.h"
+
+1386725715 source:c:\users\greathousee\dropbox\words\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<stdio.h>
+	<time.h>
+	<math.h>
+	"features.h"
+
+1386782284 source:c:\users\greathousee\dropbox\words\dictionary.cpp
+	"dictionary.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+	<cctype>
+	<cmath>
+	<vector>
+	<algorithm>
+	<iterator>
+	<algorithm>
+	<cctype>
+
+1386723907 c:\users\greathousee\dropbox\words\dictionary.h
+	<iostream>
+	<vector>
+	<string>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<conio.h>
+	<windows.h>
+

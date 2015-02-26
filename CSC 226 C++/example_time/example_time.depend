@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1386293112 source:c:\users\greathousee\documents\csc 226\example_time\main.cpp
+	<iostream>
+	<stdio.h>
+	<time.h>
+	<math.h>
+	<cstdlib>
+	<iomanip>
+

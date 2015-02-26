@@ -1,0 +1,6 @@
+Dear [0 "person"],
+
+One day, I would like to live in [1 "place"], spending the rest of my life with you. We could sit in [2 "adjective"] rocking chairs, watching [3 "noun"] [4 "verb in present participle"]. I want you to know that you look [5 "adverb"], and I hope you feel the same. [0], you complete me.
+Love,
+[6 "person"]
+END

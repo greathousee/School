@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1361149565 source:c:\users\greathousee\documents\c++\greathousee-a8\debugging-example.cpp
+	<iostream>
+
+1353751060 source:c:\users\greathousee\documents\c++\greathousee-a8\main.cpp
+	<iostream>
+
+1361151669 source:c:\users\greathousee\documents\c++\greathousee-a8\debugme.cpp
+	<iostream>
+
