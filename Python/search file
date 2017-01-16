@@ -1,0 +1,84 @@
+#-------------------------------------------------------------------------------
+# Name:        Linear and Binary Search
+# Purpose: This program takes as input a file name, reads the file and stores
+#           in an array, then searches the array for a particular word
+ 
+# Author:      greathousee
+#
+# Created:     31/08/2014
+# Copyright:   (c) greathousee 2014
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+import time
+ 
+print('This program opens a file, reads the file, and searches a file')
+ 
+## This function is adapted from
+##  http://stackoverflow.com/questions/13259288/returning-a-list-of-words-after-reading-a-file-in-python
+## with exception handling built into it. Also integrated is a method to
+## strip punctuation usingideas/code from
+##      http://stackoverflow.com/questions/19414161/removing-punctuation-in-lists-in-python
+def read_words(words_file_name):
+    '''This function opens a file with the name in 'words_file', reads in
+    the contents and returns a list of the words, stripped of whitespace.
+    pre: none, as this function handles IOError for when the file is not there gracefully
+    post: returns the list of words in the file, which is empty on an open fail. '''
+    words_list =[]
+    try:
+        open_file = open(words_file_name, 'r')
+        contents = open_file.readlines()
+ 
+        # replace punctuation with a blank space
+        punctuation = ['(', ')', '?', ':', ';', ',', '.', '!', '/', '"', "'"]
+        for i in punctuation:
+            for j in range(len(contents)):
+                contents[j] = contents[j].replace(i,"")
+ 
+        for i in range(len(contents)):
+            contents[i].lower()
+            words_list.extend((contents[i].lower()).split())
+# Asks user what word to be searched for
+        find_word = raw_input('Enter word to search for')
+        count = 0
+        answer = raw_input('Would you like to do a binary search? Enter "y" or "Y"')
+# Asks if the user would also like to do a binary search
+        start_time = time.time()
+        for a in range(len(contents)):
+            if contents[a] == find_word:
+                count = count + 1
+                print("The linear search found ", find_word, " ", count, " times")
+        end_time = time.time()
+        total_time = end_time - start_time
+        print("Linear search took ", total_time)
+# Linear search complete, no conducting binary search
+        if answer == 'y' or 'Y':
+            start_time = time.time()
+            contents.sort()
+            keep_going = 'yes'
+            while keep_going == 'yes':
+                hi = len(contents)
+                low = 0
+                mid = (low + hi)/2
+                if contents[mid] < find_word:
+                    low = mid + 1
+                elif contents[mid] > find_word:
+                    hi = mid
+                else:
+                    print("The word has been found in spot", mid)
+                    keep_going = 'no'
+                    end_time = time.time()
+            total_time = end_time - start_time
+            print("Binary search took ", total_time)
+ 
+        open_file.close()
+        print("program finished")
+    except IOError:
+        print("File does not exist! Try again.")
+    return words_list
+ 
+def main():
+    file_name = raw_input('Enter file name')
+    input_words = read_words(file_name)
+ 
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cmath>
+ 
+using namespace std;
+ 
+double c_to_f(double temp);
+double f_to_c(double temp);
+double windchill(double Ftemp);
+double heat_index(double Ftemp, double rlthumid);
+ 
+int main()
+{
+    double Ftemp;
+    double Ctemp;
+    char option;
+    cout << "Welcome to the weather calculator. This program is designed\n";
+    cout << " to convert celcius to fahrenheit, and backwards.\n";
+    cout << " In addition, this program also gives the heat index and windchill.\n";
+    cout << " What temperature would you like to input?\n";
+    cout << " (f or F for fahrenheit) (c or C for celcius)" << endl;
+    cin >> option;
+    cout.setf(ios::fixed);
+    cout.setf(ios::showpoint);
+    cout.precision(2);
+    while ((option != 'F') && (option != 'f') && (option != 'c') && (option != 'C'))
+           {
+     cout << "That is not a valid option, please try again.";
+     cin >> option;
+    }
+    if ((option == 'F') || (option == 'f'))
+    {
+        cout << "Please enter the temperature." << endl;
+        cin >> Ftemp;
+        cout << "temperature is " << f_to_c(Ftemp) << " degrees celcius, and " << Ftemp << " degrees fahrenheit.\n" << endl;
+    }
+    if ((option == 'C') || (option == 'c'))
+    {
+        cout << "Please enter the temperature." << endl;
+        cin >> Ctemp;
+        cout << "The temperature is " << c_to_f(Ctemp) << " degrees fahrenheit, and " << Ctemp << "degrees celcius.\n" << endl;
+    }
+    if ((Ftemp < 51) || (c_to_f(Ctemp)))
+    {
+        cout << "Now, lets calculate the wind chill.\n";
+        cout << "Please enter the windspeed.\n" << endl;
+        windchill(Ftemp);
+        cout << "The wind chill is " << windchill << "degrees fahrenheit.\n" << endl;
+    }
+ 
+    return 0;
+}
+double f_to_c(double temp)
+{
+    double Ctemp;
+    Ctemp = (temp - 32)/1.8;
+    return Ctemp;
+}
+double c_to_f(double temp)
+{
+    double Ftemp;
+    Ftemp = (1.8*temp)+ 32;
+    return Ftemp;
+}
+double windchill(double Ftemp)
+{
+    double wind_speed;
+    double p;
+    cin >> wind_speed;
+    p = pow(2, 0.16);
+    double windchill;
+    windchill = 35.74 + (0.6215*Ftemp) - (35.75)*p + (0.4275)*Ftemp*p;
+    return windchill;
+}

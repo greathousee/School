@@ -1,0 +1,83 @@
+#Copyright Jon Berg , turtlemeat.com
+ 
+import string,cgi,time
+from os import curdir, sep
+from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+ 
+username = 'scott'
+password = 'heggen'
+ 
+class MyHandler(BaseHTTPRequestHandler):
+ 
+ 
+    def do_GET(self):
+        def serve_Page():
+            f = open(curdir + sep + self.path)
+            #note that this potentially makes every file on your computer readable by the internet
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            self.wfile.write(f.read())
+            f.close()
+ 
+        try:
+            if self.path.endswith(".html"):
+                if self.path == "/login.html":
+                    serve_Page()
+                elif open(curdir + sep + "/cookie.txt", 'r').readline() == 'true':
+                    '''If a cookie exists, we simply need the function to return.
+                        Normally, we could have the page redirect to index.html, but
+                        that is not required for this project'''
+                    return
+            return
+        except IOError:
+            self.send_error(404,'File Not Found: %s' % self.path)
+ 
+    def do_POST(self):
+        global rootnode
+        try:
+            ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+            if ctype == 'multipart/form-data':
+                query=cgi.parse_multipart(self.rfile, pdict)
+            self.send_response(301)
+ 
+            self.end_headers()
+            print('opening file')
+            f2 = open(curdir + sep + "/pw.txt", 'r')
+            print('file opened')
+            a_line = f2.readline().split(':')
+            print('line read')
+            print a_line
+            print('line split')
+            f2.close()
+            print('file closed')
+ 
+            unIn = query.get('un')
+            pwIn = query.get('pwd')
+            print('queryed stuff')
+ 
+            if unIn[0] == a_line[0] and pwIn[0] == a_line[1]:
+                f3 = open(curdir + sep + "/cookie.txt", 'w')
+                f3.write('true')
+                f3.close()
+                print('changed cookie')
+ 
+        except :
+            pass
+ 
+def main():
+    try:
+        server = HTTPServer(('', 80), MyHandler)
+        print 'started httpserver...'
+        server.serve_forever()
+    except KeyboardInterrupt:
+        print '^C received, shutting down server'
+        server.socket.close()
+ 
+if __name__ == '__main__':
+    main()
+'''
+Edward Greathouse
+Jerry Strange
+9/8/14
+Computer Security

@@ -1,0 +1,42 @@
+Bisection: 
+function c = bisect(f,a,b,epsilon) % where a, b, and epsilon are constants
+n=1;
+c= (a+b)/2;
+display ([n,c,f(c)]);
+while abs ((c-b)/b)>epsilon %if <epsilon, it skips the while loop altogether
+ if f(a)*f(c)<0
+ b=c;
+ else
+ a=c;
+ end
+ n=n+1;
+ c =(a+b)/2;
+ display ([n,c,f(c)]);
+end
+end
+
+ Secant: 
+function c = secant(f,a,b,epsilon) % where a, b, and epsilon are constants
+n=1;
+c= ((a*f(b))-(b*f(a)))/(f(b)-f(a));
+display ([n,c,f(c)]);
+while abs ((c-b)/b)>epsilon %if <epsilon, it skips the while loop altogether
+ a=b;
+ b=c;
+ n=n+1;
+ c= ((a*f(b))-(b*f(a)))/(f(b)-f(a));
+ display ([n,c,f(c)]);
+end
+end
+
+
+ Functions Used: 
+function y=func(x);
+%y=x^2-2;
+%y=x-exp(-x); %for number 1
+%y=x-cos(x);
+%y=cos(x)-exp(-x);
+%y=x-exp(cos(x));
+%y=3-6*x^2+0.15*sin(200*x); %question 4 equation
+y=(3*x-4)^5; %question 5 equation
+end 

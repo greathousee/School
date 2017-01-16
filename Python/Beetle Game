@@ -1,0 +1,130 @@
+import random
+class Player:
+ 
+    def __init__(self, body=0, head=0, tail=0, eyes=0, feeler=0, legs=0, turn=1):
+        self.body = body
+        self.head = head
+        self.tail = tail
+        self.eyes = eyes
+        self.feeler = feeler
+        self.legs = legs
+        self.turn = 1
+ 
+    def add_body(self):
+        if self.body == 0:
+            self.body = 1
+        if self.body == 1:
+            self.turn = 0
+            print ('You got a body already')
+ 
+    def add_head(self):
+        if self.head == 0:
+            self.head = 1
+        if self.head == 1:
+            self.turn = 0
+            print ('You got a head already')
+ 
+    def add_legs(self):
+        if self.legs == 0:
+            self.legs = 2
+        if self.legs == 2:
+            self.legs = 4
+        if self.legs == 4:
+            self.legs= 6
+        if self.legs == 6:
+            self.turn = 0
+            print ('You have enough Legs')
+ 
+    def add_eyes(self):
+        if self.eyes == 0:
+            self.eyes = 1
+        if self.eyes  == 1:
+            self.eyes = 2
+        if self.eyes == 2:
+            self.turn = 0
+            print ('You have enough eyes')
+ 
+    def add_feeler(self):
+        if self.feeler == 0:
+            self.feeler = 1
+        if self.feeler == 1:
+            self.feeler = 2
+        if self.feeler == 2:
+            self.turn = 0
+            print ('You have enough Feelers')
+ 
+    def add_tail(self):
+        if self.tail == 0:
+            self.tail = 1
+        if self.tail == 1:
+            self.turn = 0
+            print ('You have enough Tails')
+ 
+    def add_body_parts(self, integer):
+        """Will add add body parts to the Beetle based on the integer (between 1 and 6)
+ 
+            Pre: an integer between 1 and 6 is given
+            Post: a body part has been added to the beetle"""
+ 
+ 
+        if integer == 1:
+            self.add_body()
+        print('You have ' + str(self.body) + ' body.')
+ 
+        if integer == 2:
+            self.add_head()
+        print('You have ' + str(self.head) + ' head.')
+ 
+ 
+        if integer == 3:
+            self.add_legs()
+        print('You have ' + str(self.legs) + ' legs.')
+ 
+ 
+        if integer == 4:
+            self.add_eyes()
+        print('You have ' + str(self.eyes) + ' eyes.')
+ 
+ 
+        if integer == 5:
+            self.add_feeler()
+        print('You have ' + str(self.feeler) + ' feelers.')
+ 
+        if integer == 6:
+            self.add_tail()
+        print('You have ' + str(self.tail) + ' tail.')
+ 
+    def roll_dice(self):
+        """This function returns a random number (corresponding to rolling a die)
+        between 1 and 6. The generated number will then be used by the add_body_part
+        function to add a body part or skip a turn."""
+ 
+        body_part = random.randint(1,6) # body_part variable will contain a number between 1 and 6 inclusive
+ 
+        self.add_body_parts(body_part) # Calls function to use randomly generated number
+ 
+    def check_winner(self):
+        """checks to see if the player has the required body parts to win the game and is part of the player class"""
+        if self.body==1: #I am not for sure if these should just say body==1
+            if self.head==1:
+                if self.tail==1:
+                    if self.eyes==2:
+                        if self.feeler==2:
+                            if self.legs==6:
+                               return True
+        return False
+ 
+player1 = Player()
+player2 = Player()
+ 
+while (player1.check_winner() == False and player2.check_winner() == False):
+    player1.turn = 1
+    while (player1.turn==1):
+        player1.roll_dice()
+    player2.turn = 1
+    while (player2.turn==1):
+        player2.roll_dice()
+if player1.check_winner()==True:
+    print ('Player 1 Wins!')
+else:
+    print ('Player 2 Wins!')

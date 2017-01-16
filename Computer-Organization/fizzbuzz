@@ -1,0 +1,40 @@
+/* To Compile
+    gcc fizzbuzz.c
+    */
+
+/* Includes */
+
+#include <stdio.h>
+
+/* Main */
+/* main() must return an int. */
+
+int main () {
+    int i;
+    
+    for (i = 0 ; i < 1024 ; i += 1) {
+        
+        if (i % 3 == 0) {
+            
+            printf("Fizz");
+           
+        }  else if (i % 5 == 0) {
+                
+            printf("Buzz");
+                
+        }  else if ((i % 3 == 0) && (i % 5 == 0)) {
+            
+            printf("FizzBuzz");
+        
+            
+        }
+        
+            else {
+            
+            printf("%d\n", i);
+        }
+    }
+    
+    /*Return -; everything is just fine. */
+    return 0;
+}

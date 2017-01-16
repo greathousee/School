@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "square.h"
+
+/* BEGIN NO STUDENT COMMENTS */
+int tests_run = 0;
+/* END NO STUDENT COMMENTS */
+
+static char * test_get_number_of_messages() {
+ int msgs;
+ msgs = get_number_of_messages();
+ 
+ mu_assert("There should be more than zero messages!", msgs > 0);
+ 
+ return 0;
+}
+
+static char * test_open_message_file() {
+ FILE *fp;
+ fp = open_message_file();
+  
+  mu_assert("The message file pointer should not be NULL!", fp != NULL);
+  
+ if (fp != NULL) {
+  fclose(fp);
+ } 
+ 
+ return 0;
+}
+
+static char * test_advance_to_message () {
+ FILE *fp;
+ char correct[] = {'G', 'T', 'I', 'D', 'T'};
+ 
+ for (int i = 0 ; i < 5; i++) {
+  fp = advance_to_msg(i); 
+  printf("\t... Checking ability to advance to message %d\n", i);
+  mu_assert("Found wrong message in first five.", getc(fp) == correct[i]);
+  close_message_file(fp);
+ }
+ return 0;
+}
+
+static char * test_get_message_length () {
+  int lengths[] = {40, 24, 39, 76, 52, 79, 66, 88, 51, 22, 39, 42, 71, 40, 49, 32, 31, 67, 106, 20};
+  
+  /* 
+  for (int i = 0 ; i < get_number_of_messages() ; i++) {
+   int length;
+   length = get_message_length(i);
+   printf("%d, ", length);
+  }
+  */
+  
+  for (int i = 0 ; i < get_number_of_messages() ; i++) {
+   int length;
+   length = get_message_length(i);
+   printf("\t... Checking length of message index %d (%d)\n", i, length);
+   mu_assert("Found wrong message length.",  length == lengths[i]);
+  }
+  return 0;
+}
+
+static char * test_read_message () {
+ char * messages[] = {"Godhasmadeofonebloodallpeoplesoftheearth", \
+                    "Thereisdignityinalllabor", \
+                    "Imaginationismoreimportantthanknowledge", \
+                    "Donotdwellinthepastdonotdreamofthefutureconcentratethemindonthepresentmoment", \
+                    "Thebestplacetofindahelpinghandisattheendofyourownarm", \
+                    "IfyourstrengthissmalldontcarryheavyburdensIfyourwordsareworthlessdontgiveadvice", \
+                    "Ifyouarepatientinonemomentofangeryouwillescapeahundreddaysofsorrow", \
+                    "Ifyoumustplaydecideuponthreethingsatthestarttherulesofthegamethestakesandthequittingtime", \
+                    "Learningisatreasurethatwillfollowitsownereverywhere", \
+                    "Achangeisasgoodasarest", \
+                    "Aknownmistakeisbetterthananunknowntruth", \
+                    "Arroganceisaweedthatgrowsmostlyonadunghill", \
+                    "Acuttingwordisworsethanabowstringacutmayhealbutthecutofthetonguedoesnot", \
+                    "Afoollooksfordungwherethecowneverbrowsed", \
+                    "Ifyoudontstandforsomethingyouwillfallforsomething", \
+                    "Adversityisthefoundationofvirtue", \
+                    "Anexcessofcourtesyisdiscourtesy", \
+                    "Opinionsfoundedonprejudicearealwayssustainedwiththegreatestviolence", \
+                    "InacountrywellgovernedpovertyissomethingtobeashamedofInacountrybadlygovernedwealthissomethingtobeashamedof", \
+                    "Thecautiousseldomerr" \
+                    };
+
+ for (int i = 0 ; i < get_number_of_messages() ; i++) {
+  int message_length = get_message_length(i);
+  char *msg = read_message(i);
+  printf("\t... Checking correctness of message %d\n", i);
+  
+  for (int pos = 0 ; pos < message_length ; pos++) {
+   /* printf("POS[%d] msg[%c] messages[%c]\n", pos, msg[pos], messages[i][pos]); */
+   mu_assert("Found wrong character in message.", msg[pos] = messages[i][pos]);
+  }
+  
+  free(msg);
+ }
+ return 0;
+}
+
+static char * all_tests() {
+ mu_run_test(test_get_number_of_messages);
+ mu_run_test(test_open_message_file);
+ mu_run_test(test_advance_to_message);
+ mu_run_test(test_get_message_length);
+ mu_run_test(test_read_message);
+ return 0;
+}
+
+/* Standard main() for running all tests. */
+int main(int argc, char **argv) {
+ char *result = all_tests();
+ if (result != 0) {
+     printf("%s\n", result);
+ }
+ else {
+     printf("ALL TESTS PASSED\n");
+ }
+ printf("Tests run: %d\n", tests_run);
+
+ return result != 0;
+}
